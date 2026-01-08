@@ -17,7 +17,7 @@ machine:
   machine_type: "g4dn.xlarge" # GPU instance for ML workloads
 
   # Docker image for client VMs (use version tags for production)
-  image: "ghcr.io/talmolab/lablink-client-base-image:linux-amd64-0d73aef91a90afe5289b2252fcde76aa1fd4e31f-test"
+  image: "ghcr.io/talmolab/lablink-client-base-image:linux-amd64-latest-test"
 
   # AMI ID for your AWS region (Ubuntu 24.04 with Docker + Nvidia GPU Driver)
   ami_id: "ami-0601752c11b394251" # us-west-2 Ubuntu 24.04 custom AMI
