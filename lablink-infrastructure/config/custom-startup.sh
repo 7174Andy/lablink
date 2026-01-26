@@ -1,17 +1,24 @@
-#!/bin/bash
-# custom-startup.sh - Install SLEAP with GPU support
-
+#!/bin/bash                                                                                                                                                    
 set -e
 
-echo "Installing SLEAP..."
+echo "Installing Foldseek..."
 
-# Install SLEAP with PyTorch GPU support (CUDA 12.8)
-uv tool install --python 3.13 "sleap[nn]" \
-    --index https://download.pytorch.org/whl/cu128 \
-    --index https://pypi.org/simple
+# Create installation directory                                                                                                                                
+FOLDSEEK_DIR="/home/client/foldseek"
+mkdir -p "$FOLDSEEK_DIR"
+cd "$FOLDSEEK_DIR"                                                                                                                                         
 
-echo "SLEAP installation complete!"
+# Download and extract Foldseek GPU build                                                                                                                      
+# Requires: glibc >= 2.17 and NVIDIA driver >= 525.60.13                                                                                                       
+wget -q https://mmseqs.com/foldseek/foldseek-linux-gpu.tar.gz                                                                                                  
+tar xzf foldseek-linux-gpu.tar.gz                                                                                                                              
+rm foldseek-linux-gpu.tar.gz                                                                                                                                   
 
-# Verify installation
-echo "Verifying SLEAP installation..."
-sleap-label --version || echo "sleap-label installed at: $(which sleap-label 2>/dev/null || echo '/home/client/.local/bin/sleap-label')"
+# Add to PATH for current session                                                                                                                              
+export PATH="$FOLDSEEK_DIR/foldseek/bin:$PATH"                                                                                                                 
+
+# Add to PATH permanently for future sessions                                                                                                                  
+echo "export PATH=\"$FOLDSEEK_DIR/foldseek/bin:\$PATH\"" >> /home/client/.bashrc
+echo "export PATH=\"$FOLDSEEK_DIR/foldseek/bin:\$PATH\"" >> /home/client/.profile
+
+echo "Foldseek installed successfully. Version: $(foldseek version 2>/dev/null || echo 'check with foldseek -h')"                                              
