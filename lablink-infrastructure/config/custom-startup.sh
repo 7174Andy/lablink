@@ -15,7 +15,7 @@ tar xzf foldseek-linux-gpu.tar.gz
 rm foldseek-linux-gpu.tar.gz
 
 # Add to PATH for current session
-export PATH="$FOLDSEEK_DIR/foldseek/bin:$$PATH"
+export PATH="$FOLDSEEK_DIR/foldseek/bin:$PATH"
 
 # Add to PATH permanently for future sessions
 echo "export PATH=\"$FOLDSEEK_DIR/foldseek/bin:\$PATH\"" >> /home/client/.bashrc
